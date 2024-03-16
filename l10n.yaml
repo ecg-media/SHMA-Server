@@ -1,0 +1,4 @@
+arb-dir: lib/l10n
+template-arb-file: shma_server_de.arb
+output-localization-file: shma_server_localizations.dart
+untranslated-messages-file: untranslated_messages.txt
