@@ -175,7 +175,7 @@ jobs:
     #      security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$MACOS_CERTIFICATE_PWD" build.keychain
    #       echo "Find Identity"
     #      security find-identity
-          echo "apply provisioning profile"
+    #      echo "apply provisioning profile"
     #      mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
    #       cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
    #       cat ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
@@ -205,13 +205,13 @@ jobs:
           #  --hdiutil-quiet \
           #  "ECG-Medialib-Admin-${{github.ref_name}}-macos.dmg" \
           #  "ECG Mediathek.app"
-      - name: macOS Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-           files: |
-             certificate.p12
-             build_pp.mobileprovision
+    #  - name: macOS Release
+    #    uses: softprops/action-gh-release@v1
+    #    if: startsWith(github.ref, 'refs/tags/')
+    #    env:
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #    with:
+    #       files: |
+    #         certificate.p12
+    #         build_pp.mobileprovision
           #files: build/macos/Build/Products/Release/ECG-Medialib-Admin-${{github.ref_name}}-macos.dmg
