@@ -28,13 +28,13 @@ while IFS='=' read -r key value
 do
   case $key in
 	appTitle_en)
-		sed -i -E "s/\"appTitle\": .*/\"appTitle\": \"$value\",/" "$DIR/lib/l10n/admin_app_en.arb"
+		sed -i -E "s/\"appTitle\": .*/\"appTitle\": \"$value\",/" "$DIR/lib/l10n/shma_server_en.arb"
 		;;
 	appTitle_ru)
-		sed -i -E "s/\"appTitle\": .*/\"appTitle\": \"$value\",/" "$DIR/lib/l10n/admin_app_ru.arb"
+		sed -i -E "s/\"appTitle\": .*/\"appTitle\": \"$value\",/" "$DIR/lib/l10n/shma_server_ru.arb"
 		;;
 	appTitle_de)
-		sed -i -E "s/\"appTitle\": .*/\"appTitle\": \"$value\",/" "$DIR/lib/l10n/admin_app_de.arb"
+		sed -i -E "s/\"appTitle\": .*/\"appTitle\": \"$value\",/" "$DIR/lib/l10n/shma_server_de.arb"
 		;;
 	appTitle)
 		sed -i -E "s/  if \(!window.CreateAndShow\(L\".*\", origin, size\)\) \{/  if \(!window.CreateAndShow\(L\"$value\", origin, size\)\) \{/" "$DIR/windows/runner/main.cpp"
@@ -46,9 +46,9 @@ do
 	appId)
 		sed -i -E "s/PRODUCT_BUNDLE_IDENTIFIER = .*/PRODUCT_BUNDLE_IDENTIFIER = $value/" "$DIR/macos/Runner/Configs/AppInfo.xcconfig"
 		sed -i -E "s/set\(APPLICATION_ID \".*\"\)/set\(APPLICATION_ID \"$value\"\)/" "$DIR/linux/CMakeLists.txt"
-		sed -i -E "s/		<string>\$(AppIdentifierPrefix)de.wekode.mmlAdmin<\/string>/		<string>\$(AppIdentifierPrefix)$value<\/string>/" "$DIR/macos/Runner/DebugProfile.entitlements"
-		sed -i -E "s/		<string>\$(AppIdentifierPrefix)de.wekode.mmlAdmin<\/string>/		<string>\$(AppIdentifierPrefix)$value<\/string>/" "$DIR/macos/Runner/Release.entitlements"
-		sed -i -E "s/		<string>\$(AppIdentifierPrefix)de.wekode.mmlAdmin<\/string>/		<string>\$(AppIdentifierPrefix)$value<\/string>/" "$DIR/macos/Runner/RunnerDebug.entitlements"
+		sed -i -E "s/		<string>\$(AppIdentifierPrefix)de.wekode.shma_server<\/string>/		<string>\$(AppIdentifierPrefix)$value<\/string>/" "$DIR/macos/Runner/DebugProfile.entitlements"
+		sed -i -E "s/		<string>\$(AppIdentifierPrefix)de.wekode.shma_server<\/string>/		<string>\$(AppIdentifierPrefix)$value<\/string>/" "$DIR/macos/Runner/Release.entitlements"
+		sed -i -E "s/		<string>\$(AppIdentifierPrefix)de.wekode.shma_server<\/string>/		<string>\$(AppIdentifierPrefix)$value<\/string>/" "$DIR/macos/Runner/RunnerDebug.entitlements"
 		sed -i -E "s/  identity_name: .*/  identity_name: $value/" "$DIR/pubspec.yaml"
 		;;
 	*)
