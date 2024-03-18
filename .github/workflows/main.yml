@@ -23,9 +23,9 @@ jobs:
           ver_dump=$(echo "${version/-ecg/''}")
           chmod +x customize
           ./customize
-          sed -i -E "s/version: [0-9]+.[0-9]+.[0-9]+\+[0-9]+/version: $ver_dump+${{github.run_number}}/" "./shma-server/pubspec.yaml"
-          sed -i -E "s/#define VERSION_AS_STRING \"1.0.0\"/#define VERSION_AS_STRING \"$ver_dump\"/" "./shma-server/windows/runner/Runner.rc"
-          sed -i -E "s/ DEVELOPMENT_TEAM = S79Z2R2WAC;/ DEVELOPMENT_TEAM = ${{ secrets.APPLE_TEAM_ID }};/" "./shma-server/macos/Runner.xcodeproj/project.pbxproj"
+          sed -i -E "s/version: [0-9]+.[0-9]+.[0-9]+\+[0-9]+/version: $ver_dump+${{github.run_number}}/" "./SHMA-Server/pubspec.yaml"
+          sed -i -E "s/#define VERSION_AS_STRING \"1.0.0\"/#define VERSION_AS_STRING \"$ver_dump\"/" "./SHMA-Server/windows/runner/Runner.rc"
+          sed -i -E "s/ DEVELOPMENT_TEAM = S79Z2R2WAC;/ DEVELOPMENT_TEAM = ${{ secrets.APPLE_TEAM_ID }};/" "./SHMA-Server/macos/Runner.xcodeproj/project.pbxproj"
       - name: Artefact customized version
         uses: actions/upload-artifact@v3
         with:
