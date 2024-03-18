@@ -111,7 +111,7 @@ jobs:
           echo "After installing app. Copy the libraries from libs folder to the root directory of your installation path" >> rel/README_FIRST.txt
           cp ecg_sign.cer rel/ecg_sign.cer
           mkdir rel/libs
-          cp -a ./config/libs/windows/. rel/libs/
+          cp -R ./config/libs/windows/* rel/libs/
           mv  build/windows/x64/runner/Release/shma_server.msix rel/ECG-Stream-Server-${{github.ref_name}}.msix
       - name: Archive Release
         uses: thedoctor0/zip-release@master
