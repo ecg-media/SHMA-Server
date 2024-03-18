@@ -1,0 +1,42 @@
+name: Sync fork with upstream
+
+on:
+  schedule:
+  - cron:  "0 0 1/7 * *"
+  workflow_dispatch:
+
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.SYNC_PAT }}
+        persist-credentials: false
+    - name: repo-sync
+      uses: repo-sync/github-sync@v2
+      with:
+        source_repo: "https://github.com/we-kode/shma-server"
+        source_branch: "master"
+        destination_branch: "master"
+        github_token: ${{ secrets.SYNC_PAT }}
+        sync_tags: "true"
+    - uses: oprypin/find-latest-tag@v1
+      id: latest-tag
+      with:
+         repository: ecg-media/SHMA-Server
+    - name: Tag
+      run: |
+          tag=${{ steps.latest-tag.outputs.tag }}-ecg
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git tag -a "${tag}" -m ""
+          git push origin "${tag}"
+      if: ${{ !endsWith(steps.latest-tag.outputs.tag,'-ecg') }}
+    
+    - name: create release
+      uses: ncipollo/release-action@v1
+      if: ${{ !endsWith( steps.latest-tag.outputs.tag, '-ecg' ) }}
+      with:
+        tag: ${{ steps.latest-tag.outputs.tag }}-ecg
+        token: ${{ secrets.SYNC_PAT }}
