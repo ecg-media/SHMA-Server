@@ -172,7 +172,11 @@ class DBService {
     final db = await _database;
     await db.update(
       _tChannel,
-      channel.toJson(),
+      Map.of({
+        'title': channel.title,
+        'port': channel.port,
+        'inputSource': channel.inputSource,
+      }),
       where: '"id" = ?',
       whereArgs: [channel.id],
       conflictAlgorithm: ConflictAlgorithm.rollback,
