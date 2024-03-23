@@ -19,6 +19,7 @@ class ChannelStream {
       _stream = await _rec.startStream(
         RecordConfig(
           encoder: AudioEncoder.pcm16bits,
+          numChannels: 1,
           device: devices.where((d) => d.id == deviceId).firstOrNull,
         ),
       );
